@@ -9,8 +9,6 @@ on:
   workflow_dispatch:
 
 env:
-  GODOT_VERSION: 4.3
-
   # ANDROID ONLY
   KEYSTORE_DEBUG_ALIAS: DEBUGALIAS
   KEYSTORE_DEBUG_PASSWORD: DEBUGPASSWORD
@@ -57,8 +55,8 @@ jobs:
         id: export_game
         uses: firebelley/godot-export@v6.0.0
         with:
-          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/$GODOT_VERSION/Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
-          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/$GODOT_VERSION/Godot_v$GODOT_VERSION-stable_export_templates.tpz
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export_templates.tpz
           relative_project_path: ./
           relative_export_path: ./builds
           archive_output: true

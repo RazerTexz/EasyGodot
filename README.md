@@ -4,7 +4,6 @@ The workflow variables are defined in [godot-export.yml](https://github.com/Raze
 ## Workflow Variables
 | Variable Name               | Description                                           |
 |-----------------------------|-------------------------------------------------------|
-| `GODOT_VERSION`             | The version of Godot used for exporting the project.  |
 | `KEYSTORE_DEBUG_ALIAS`      | The alias name for the debug keystore.                |
 | `KEYSTORE_DEBUG_PASSWORD`   | The password for the debug keystore.                  |
 | `KEYSTORE_RELEASE_ALIAS`    | The alias name for the release keystore.              |
