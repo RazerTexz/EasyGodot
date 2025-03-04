@@ -1,11 +1,6 @@
 # AFAIK SUPPORTS BUILDING FOR ANDROID, LINUX, AND WINDOWS
 name: "Godot Export"
 on:
-  push:
-    paths-ignore:
-      - '**.md'
-      - '.github/**'
-      - '**/LICENSE'
   workflow_dispatch:
 
 env:
