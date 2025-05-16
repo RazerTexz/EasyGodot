@@ -1,14 +1,14 @@
 # AFAIK SUPPORTS BUILDING FOR ANDROID, LINUX, AND WINDOWS
-name: "Godot Export"
+name: 'Godot Export'
 on:
   workflow_dispatch:
 
 env:
   # ANDROID ONLY
-  KEYSTORE_DEBUG_ALIAS: DEBUGALIAS
-  KEYSTORE_DEBUG_PASSWORD: DEBUGPASSWORD
-  KEYSTORE_RELEASE_ALIAS: RELEASEALIAS
-  KEYSTORE_RELEASE_PASSWORD: RELEASEPASSWORD
+  KEYSTORE_DEBUG_ALIAS: 'DEBUGALIAS'
+  KEYSTORE_DEBUG_PASSWORD: 'DEBUGPASSWORD'
+  KEYSTORE_RELEASE_ALIAS: 'RELEASEALIAS'
+  KEYSTORE_RELEASE_PASSWORD: 'RELEASEPASSWORD'
 
 jobs:
   godot_export:
@@ -20,8 +20,8 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: '21'
+          distribution: 'temurin'
           check-latest: true
 
       - name: Setup Android SDK
@@ -31,12 +31,12 @@ jobs:
 
       - name: Create Key
         run: |
-          keytool -keyalg RSA -genkeypair -alias $KEYSTORE_DEBUG_ALIAS -keypass $KEYSTORE_DEBUG_PASSWORD -keystore debug.keystore -storepass $KEYSTORE_DEBUG_PASSWORD -dname "CN=Android Debug,O=Android,C=US" -validity 9999
+          keytool -keyalg RSA -genkeypair -alias "$KEYSTORE_DEBUG_ALIAS" -keypass "$KEYSTORE_DEBUG_PASSWORD" -keystore debug.keystore -storepass "$KEYSTORE_DEBUG_PASSWORD" -dname "CN=Android Debug,O=Android,C=US" -validity 9999
           sed -i "s|KEYSTORE_DEBUG_PATH|$GITHUB_WORKSPACE/debug.keystore|g" ./.godot/export_credentials.cfg
           sed -i "s|KEYSTORE_DEBUG_ALIAS|$KEYSTORE_DEBUG_ALIAS|g" ./.godot/export_credentials.cfg
           sed -i "s|KEYSTORE_DEBUG_PASSWORD|$KEYSTORE_DEBUG_PASSWORD|g" ./.godot/export_credentials.cfg
 
-          keytool -keyalg RSA -genkeypair -alias $KEYSTORE_RELEASE_ALIAS -keypass $KEYSTORE_RELEASE_PASSWORD -keystore release.keystore -storepass $KEYSTORE_RELEASE_PASSWORD -dname "CN=Android Release,O=Android,C=US" -validity 9999
+          keytool -keyalg RSA -genkeypair -alias "$KEYSTORE_RELEASE_ALIAS" -keypass "$KEYSTORE_RELEASE_PASSWORD" -keystore release.keystore -storepass "$KEYSTORE_RELEASE_PASSWORD" -dname "CN=Android Release,O=Android,C=US" -validity 9999
           sed -i "s|KEYSTORE_RELEASE_PATH|$GITHUB_WORKSPACE/release.keystore|g" ./.godot/export_credentials.cfg
           sed -i "s|KEYSTORE_RELEASE_ALIAS|$KEYSTORE_RELEASE_ALIAS|g" ./.godot/export_credentials.cfg
           sed -i "s|KEYSTORE_RELEASE_PASSWORD|$KEYSTORE_RELEASE_PASSWORD|g" ./.godot/export_credentials.cfg
@@ -52,16 +52,16 @@ jobs:
         id: export_game
         uses: firebelley/godot-export@v6.0.0
         with:
-          godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.x86_64.zip
-          godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz
-          relative_project_path: ./
-          relative_export_path: ./builds
+          godot_executable_download_url: 'https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.x86_64.zip'
+          godot_export_templates_download_url: 'https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz'
+          relative_project_path: './'
+          relative_export_path: './builds'
           archive_output: true
-          wine_path: ${{ steps.install_wine.outputs.WINE_PATH }}
+          wine_path: "${{ steps.install_wine.outputs.WINE_PATH }}"
 
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: upload
-          path: ${{ steps.export_game.outputs.archive_directory }}
-          retention-days: 2
+          name: 'upload'
+          path: "${{ steps.export_game.outputs.archive_directory }}"
+          retention-days: '2'
