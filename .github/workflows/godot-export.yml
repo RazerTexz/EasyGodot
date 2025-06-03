@@ -31,12 +31,12 @@ jobs:
 
       - name: Create Key
         run: |
-          keytool -keyalg RSA -genkeypair -alias "$KEYSTORE_DEBUG_ALIAS" -keypass "$KEYSTORE_DEBUG_PASSWORD" -keystore debug.keystore -storepass "$KEYSTORE_DEBUG_PASSWORD" -dname "CN=Android Debug,O=Android,C=US" -validity 9999
+          keytool -genkeypair -keyalg RSA -keysize 2048 -keystore debug.keystore -alias "$KEYSTORE_DEBUG_ALIAS" -storepass "$KEYSTORE_DEBUG_PASSWORD" -keypass "$KEYSTORE_DEBUG_PASSWORD" -validity 9999 -dname "CN=Android Debug,O=Android,C=US"
           sed -i "s|KEYSTORE_DEBUG_PATH|$GITHUB_WORKSPACE/debug.keystore|g" .godot/export_credentials.cfg
           sed -i "s|KEYSTORE_DEBUG_ALIAS|$KEYSTORE_DEBUG_ALIAS|g" .godot/export_credentials.cfg
           sed -i "s|KEYSTORE_DEBUG_PASSWORD|$KEYSTORE_DEBUG_PASSWORD|g" .godot/export_credentials.cfg
 
-          keytool -keyalg RSA -genkeypair -alias "$KEYSTORE_RELEASE_ALIAS" -keypass "$KEYSTORE_RELEASE_PASSWORD" -keystore release.keystore -storepass "$KEYSTORE_RELEASE_PASSWORD" -dname "CN=Android Release,O=Android,C=US" -validity 9999
+          keytool -genkeypair -keyalg RSA -keysize 2048 -keystore release.keystore -alias "$KEYSTORE_RELEASE_ALIAS" -storepass "$KEYSTORE_RELEASE_PASSWORD" -keypass "$KEYSTORE_RELEASE_PASSWORD" -validity 9999 -dname "CN=Android Release,O=Android,C=US"
           sed -i "s|KEYSTORE_RELEASE_PATH|$GITHUB_WORKSPACE/release.keystore|g" .godot/export_credentials.cfg
           sed -i "s|KEYSTORE_RELEASE_ALIAS|$KEYSTORE_RELEASE_ALIAS|g" .godot/export_credentials.cfg
           sed -i "s|KEYSTORE_RELEASE_PASSWORD|$KEYSTORE_RELEASE_PASSWORD|g" .godot/export_credentials.cfg
